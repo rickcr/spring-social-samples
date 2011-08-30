@@ -1,0 +1,37 @@
+* Purpose of this app is to combine some of the features of the Spring Social Showcase with the typical behavior
+ you'd also expect when working with a facebook canvas app in an iframe. In a current project we have to integrate
+ with we aren't using SpringSecurity, so this application also doesn't use SpringSecurity. It uses a simple SecurityService
+ class. (Doesn't rely on the cookie based approach of the basic spring social app or spring social canvas.)
+
+
+* IMPORTANT* currently this app resuses the facebook application setup for 'springsocialcanvas'
+  For this reason this app builds a war called spring-social-canvas.war
+  The URL is thus http://apps.facebook.com/springsocialcanvas
+
+* Build and run:
+  Build with maven: mvn clean install
+  Deploy target/spring-social-canvas.war to Tomcat 6 (or greater) and start tomcat
+  Access the project via Facebook at http://apps.facebook.com/springsocialcanvas.
+  (For nix users there is a buildAndDeploy script that will build, stop tomcat, clean Tomcat temp dirs,
+  clean logs, deploy app, start tomcat -  I know I should use the tomcat plugin - lazy for now:)
+
+* logging set up (with log4j.xml and spring using sl4j) *NOTE* Can someone help me configure it correctly.
+  You'll see Tomcat errors if you have two wars set up like this with logging done the same way. I'm sure it's
+  related to my spring logging declaration in the web.xml?
+
+* Like the spring social canvas app, this one attempts to sign you in automatically with facebook.
+  It differs though, in that it doesn't rely on the cookie stuff and it also does display a signin/singup form
+  if your real account hasn't been associated with facebook yet. (Like spring social canvas 'disconnect from facebook'
+  isn't provided either since this app is supposed to used within a logged in facebook account.)
+
+* Uses tiles like spring-social-showcase
+
+* Uses a modified UserInterceptor like spring-social-canvas
+
+* Various other changes were made within the application to merge some of the concepts of Spring Social Showcase and the
+  spring social canvas app.
+
+* I'm still pretty new to using spring mvc so I could have set things up in ways that I shouldn't - so please let me know
+  of any mistakes. All suggestions are welcome.
+
+* I know.. no unit tests yet or anything. TODO
