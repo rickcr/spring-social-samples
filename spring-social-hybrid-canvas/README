@@ -23,7 +23,7 @@
 * Like the spring social canvas app, this one attempts to sign you in automatically with facebook.
   It differs though, in that it doesn't rely on the cookie stuff and it also does display a signin/singup form
   if your real account hasn't been associated with facebook yet. (Like spring social canvas 'disconnect from facebook'
-  isn't provided either since this app is supposed to used within a logged in facebook account.)
+  isn't provided either since this app is supposed to be used within a logged in facebook account.)
 
 * Uses tiles like spring-social-showcase
 

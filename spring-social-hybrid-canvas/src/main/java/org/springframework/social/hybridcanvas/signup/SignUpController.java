@@ -3,7 +3,7 @@ package org.springframework.social.hybridcanvas.signup;
 import org.omg.CORBA.Request;
 import org.springframework.social.hybridcanvas.message.Message;
 import org.springframework.social.hybridcanvas.message.MessageType;
-import org.springframework.social.hybridcanvas.security.TempUsers;
+import org.springframework.social.hybridcanvas.security.ISecurityService;
 import org.springframework.social.hybridcanvas.signin.SignInForm;
 import org.springframework.social.hybridcanvas.signin.SignInUtils;
 import org.springframework.social.hybridcanvas.user.User;
@@ -21,12 +21,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.context.request.WebRequest;
 
+import javax.inject.Inject;
 import javax.validation.Valid;
 
 @Controller
 public class SignUpController {
 
 	private static Logger logger = LoggerFactory.getLogger(SignUpController.class);
+
+	@Inject
+	private ISecurityService securityService;
 
 	//fb app will post to this, but validation fails will call it as get
 	@RequestMapping(value="/signup")
@@ -67,10 +71,10 @@ public class SignUpController {
 	private User createAccount(SignupForm form, BindingResult formBinding) {
 		try {
 			User user = new User(form.getFirstName(), form.getLastName(), form.getUsername(), form.getPassword());
-			if (TempUsers.getUser(user.getUserName()) != null) {
+			if (securityService.getUser(user.getUserName()) != null) {
 				throw new UsernameAlreadyInUseException(user.getUserName());
 			}
-			TempUsers.addUser(user);
+			securityService.addUser(user);
 			return user;
 		} catch (UsernameAlreadyInUseException e) {
 			formBinding.rejectValue("username", "user.duplicateUsername", "already in use");

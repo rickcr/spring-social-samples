@@ -2,6 +2,8 @@ package org.springframework.social.hybridcanvas.config;
 
 import org.springframework.social.hybridcanvas.SecurityContext;
 import org.springframework.social.hybridcanvas.controller.HomeController;
+import org.springframework.social.hybridcanvas.security.ISecurityService;
+import org.springframework.social.hybridcanvas.security.SecurityService;
 import org.springframework.social.hybridcanvas.signin.SimpleSignInAdapter;
 import org.springframework.social.hybridcanvas.user.User;
 import org.slf4j.Logger;
@@ -101,6 +103,11 @@ public class SocialConfig {
 	@Bean
 	public HomeController homeController() {
 		 return new HomeController(facebook(), connectionRepository());
+	}
+
+	@Bean
+	public ISecurityService securityService() {
+		 return new SecurityService();
 	}
 
 }

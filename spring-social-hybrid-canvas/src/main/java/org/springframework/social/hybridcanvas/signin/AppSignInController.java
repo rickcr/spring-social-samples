@@ -1,7 +1,7 @@
 package org.springframework.social.hybridcanvas.signin;
 
 import org.springframework.social.connect.Connection;
-import org.springframework.social.hybridcanvas.security.TempUsers;
+import org.springframework.social.hybridcanvas.security.ISecurityService;
 import org.springframework.social.hybridcanvas.signup.SignupForm;
 import org.springframework.social.hybridcanvas.user.User;
 import org.slf4j.Logger;
@@ -15,12 +15,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.context.request.WebRequest;
 
+import javax.inject.Inject;
 import javax.validation.Valid;
 
 @Controller
 public class AppSignInController {
 
 	private static Logger logger = LoggerFactory.getLogger(AppSignInController.class);
+
+	@Inject
+	private ISecurityService securityService;
 
 	@RequestMapping(value="/signinForm", method=RequestMethod.GET)
 	public String signin(WebRequest request, ModelMap model)  {
@@ -40,7 +44,7 @@ public class AppSignInController {
 		logger.debug("   userName: {}", signInForm.getUsername());
 
 		//this just temp demo type of stuff
-		User validUser = TempUsers.getUser(signInForm.getUsername());
+		User validUser = securityService.getUser(signInForm.getUsername());
 		if (validUser != null) {
 		 	//session.setAttribute("user", user);
 			//silly for this demo, it ends up going tothe map again in utils,
