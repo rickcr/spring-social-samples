@@ -1,7 +1,8 @@
 * Purpose of this app is to combine some of the features of the Spring Social Showcase with the typical behavior
  you'd also expect when working with a facebook canvas app in an iframe. In a current project we have to integrate
- with we aren't using SpringSecurity, so this application also doesn't use SpringSecurity. It uses a simple SecurityService
- class. (Doesn't rely on the cookie based approach of the basic spring social app or spring social canvas.)
+ with we aren't using SpringSecurity, so this application also doesn't use SpringSecurity. It uses a simple
+ SecurityService class. (Doesn't rely on the cookie based approach of the basic spring social app or spring
+ social canvas.)
 
 
 * IMPORTANT* currently this app resuses the facebook application setup for 'springsocialcanvas'
@@ -28,10 +29,10 @@
 
 * Uses a modified UserInterceptor like spring-social-canvas
 
-* Various other changes were made within the application to merge some of the concepts of Spring Social Showcase and the
-  spring social canvas app.
+* Various other changes were made within the application to merge some of the concepts of Spring Social Showcase
+  and the spring social canvas app.
 
-* I'm still pretty new to using spring mvc so I could have set things up in ways that I shouldn't - so please let me know
-  of any mistakes. All suggestions are welcome.
+* I'm still pretty new to using spring mvc so I could have set things up in ways that I shouldn't - so please let
+  me know of any mistakes. All suggestions are welcome.
 
 * I know.. no unit tests yet or anything. TODO
