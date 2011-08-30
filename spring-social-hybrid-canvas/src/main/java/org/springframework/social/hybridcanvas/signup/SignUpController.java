@@ -49,7 +49,7 @@ public class SignUpController {
 		}
 	}
 
-	@RequestMapping(value="/signupSubmit", method=RequestMethod.POST)
+	@RequestMapping(value="/signupSubmit")
 	public String signup(ModelMap model, @Valid SignupForm form, BindingResult formBinding, WebRequest request) {
 		logger.debug("in signupSubmit of form submit");
 		if (formBinding.hasErrors()) {

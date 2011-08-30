@@ -34,11 +34,14 @@ public class AppSignInController {
 	}
 
 	@RequestMapping(value="/standardSignIn",method=RequestMethod.POST)
-	public String standardSignIn(@Valid SignInForm signInForm, BindingResult formBinding, NativeWebRequest request) {
+	public String standardSignIn(ModelMap model, @Valid SignInForm signInForm, BindingResult formBinding, NativeWebRequest request) {
 		logger.debug("Here in /standardSignIn");
 		if (formBinding.hasErrors()) {
 			logger.debug(" /standardSignIn submitted form has errors!");
-			//TODO doing everything from signup page right now
+			//need to put signUpForm in scope if errors on signin form since we're sharing the page with signup
+			Connection<?> connection = ProviderSignInUtils.getConnection(request);
+			SignupForm signupForm = SignupForm.fromProviderUser(connection.fetchUserProfile());
+			model.addAttribute(signupForm);
  			return "signup"; //returning null would attempt to find standardSignIn.jsp
 		}
 		logger.debug("   userName: {}", signInForm.getUsername());
