@@ -30,9 +30,7 @@ public class HomeController {
 		this.connectionRepository = connectionRepository;
 	}
 
-	/*
-	TODO. forgot why I needed both GET and POST. Can probably just use one now.
-	 */
+	//FB sends as post
 	@RequestMapping(value = "/"	,method = RequestMethod.POST)
 	public String home(Model model) {
 		logger.debug("In home() from POST");
