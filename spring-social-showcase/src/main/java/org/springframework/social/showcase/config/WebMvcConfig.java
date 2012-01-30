@@ -22,11 +22,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.social.connect.ConnectionRepository;
-import org.springframework.social.showcase.ConnectedToHandlerInterceptor;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.InterceptorConfigurer;
-import org.springframework.web.servlet.config.annotation.ResourceConfigurer;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import org.springframework.web.servlet.view.tiles2.TilesConfigurer;
@@ -42,10 +40,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 	@Inject
 	private ConnectionRepository connectionRepository;
-	
-	public void configureInterceptors(InterceptorConfigurer configurer) {
-		configurer.addInterceptor(new ConnectedToHandlerInterceptor(connectionRepository));
-	}
 
 	@Bean
 	public ViewResolver viewResolver() {
@@ -65,9 +59,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		return configurer;
 	}
 
-	public void configureResourceHandling(ResourceConfigurer resourceConfigurer) {
-		resourceConfigurer.addPathMapping("/resources/**");
-		resourceConfigurer.addResourceLocation("/resources/");
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}
 	
     @Bean
