@@ -48,11 +48,12 @@ public class MainConfig {
 		return new DataSourceTransactionManager(dataSource());
 	}
 
-	@Bean
-	public JdbcTemplate jdbcTemplate() {
-		logger.debug("jdbcTemplate() call in MainConfig");
-		return new JdbcTemplate(dataSource());
-	}
+	//if we were using the jdbc account stuff we'd need this
+//	@Bean
+//	public JdbcTemplate jdbcTemplate() {
+//		logger.debug("jdbcTemplate() call in MainConfig");
+//		return new JdbcTemplate(dataSource());
+//	}
 
  	//internal helpers
 	private DatabasePopulator databasePopulator() {
