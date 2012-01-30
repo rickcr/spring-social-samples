@@ -59,7 +59,7 @@ public class AppSignInController {
 			//now connect the user's signin with their facebook account
 			ProviderSignInUtils.handlePostSignUp(validUser.getUserName(), request);
 
-			return "redirect:http://apps.facebook.com/springsocialcanvas/";
+			return "redirect:/";
 		} else {
 			return "signin";
 		}
